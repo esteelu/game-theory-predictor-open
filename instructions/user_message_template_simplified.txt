@@ -1,0 +1,13 @@
+Please analyze the following Inter-Group Prisoner's Dilemma session and predict Team 2's outcome:
+
+## Team Composition
+**Team 1 (players you should NOT predict for):** {TEAM1_PLAYER_IDS}
+**Team 2 (players you MUST predict for):** {TEAM2_PLAYER_IDS}
+
+## Team 1 Internal Chat Logs
+{TEAM1_CHAT_LOGS}
+
+## Inter-Group Chat Logs (Both Teams)
+{INTERGROUP_CHAT_LOGS}
+
+Based on this information, please provide your analysis following the framework outlined in the system message and output in the required JSON format. Remember: you must predict the votes for ONLY the Team 2 players listed above: {TEAM2_PLAYER_IDS}
