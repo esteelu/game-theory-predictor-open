@@ -6,3 +6,7 @@ Predicting minds
 - **instructions/** - System and user instructions for the game theory predictor
 - **agent_pool/** - Agent pool configuration and management files
 - **predictions/** - Python scripts for task predictions and algorithms
+
+## Pipeline
+
+![Component Image](Component_Image.png)
