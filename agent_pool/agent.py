@@ -7,7 +7,7 @@ load_dotenv()
 
 client = OpenAI()
 
-def get_gpt4mini_client():
+def get_agent_client():
     """
     Initializes and returns the OpenAI client configured for the gpt-4.0-mini API.
     """
