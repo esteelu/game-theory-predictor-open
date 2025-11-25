@@ -1,6 +1,0 @@
-Please analyze the following trust game message and predict Player B's behavior:
-
-## Player B's Message to Player A:
-{PLAYER_B_MESSAGE}
-
-Based on this message, please provide your analysis following the framework outlined in the system message and output in the required JSON format.
