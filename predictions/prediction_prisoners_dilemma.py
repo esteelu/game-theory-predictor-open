@@ -11,7 +11,7 @@ import sys
 # ==============================================================================
 
 # --- API Call Function ---
-from host_pool import get_agent_client
+from agent_pool import get_agent_client
 
 def get_structured_prediction(system_message, user_message):
     """
