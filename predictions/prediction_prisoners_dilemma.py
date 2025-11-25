@@ -11,14 +11,14 @@ import sys
 # ==============================================================================
 
 # --- API Call Function ---
-from host_pool import get_gpt4mini_client
+from host_pool import get_agent_client
 
 def get_structured_prediction(system_message, user_message):
     """
     Gets a prediction from the AI using system and user messages with JSON output.
     """
     print("      -> Calling AI model for prediction...")
-    client = get_gpt4mini_client()
+    client = get_agent_client()
     
     try:
         completion = client.chat.completions.create(
@@ -31,7 +31,7 @@ def get_structured_prediction(system_message, user_message):
         )
         return completion.choices[0].message.content
     except Exception as e:
-        print(f"      ❌ API call failed: {e}")
+        print(f"API call failed: {e}")
         return f'{{"error": "API call failed: {str(e)}"}}'
 # ------------------------------------------------------------------------------
 
