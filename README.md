@@ -8,5 +8,5 @@ Predicting minds
 ## Project Structure
 
 - **instructions/** - System and user instructions for the game theory predictor
-- **agent_pool/** - Agent pool configuration and management files
-- **predictions/** - Python scripts for task predictions and algorithms
+- **agent_pool/** - Agent pool configuration
+- **predictions/** - Python scripts for task predictions
