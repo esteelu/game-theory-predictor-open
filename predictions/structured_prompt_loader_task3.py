@@ -4,7 +4,7 @@ import json
 
 def get_structured_game_prediction_system_user(system_message: str, user_message: str):
 
-    from host_pool import get_gpt4mini_client, MODEL_NAME, TEMPERATURE
+    from agent_pool import get_agent_client, MODEL_NAME, TEMPERATURE
     max_retries = 3
     initial_wait_time = 2
     print("      -> Calling AI model for Trust Game prediction...")
