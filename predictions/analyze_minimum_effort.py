@@ -24,7 +24,7 @@ def analyze_consolidated_results():
     total = len(valid_rows)
     correct = (valid_rows['prediction_correctness'] == 'Correct').sum()
     accuracy = (correct / total * 100) if total > 0 else 0
-    print(f"\nPlayer-level accuracy (all runs combined):")
+    print(f"Player-level accuracy (all runs combined):")
     print(f"Total predictions: {total}")
     print(f"Correct predictions: {correct}")
     print(f"Accuracy: {accuracy:.2f}%")
@@ -41,7 +41,7 @@ def analyze_consolidated_results():
     df['actual_team_choice'] = df.apply(lambda row: session_team_outcomes.get((row['run_number'], row['session_id']), 'N/A'), axis=1)
     # Save the updated data to the same CSV file
     df.to_csv(CONSOLIDATED_OUTPUT_FILE, index=False)
-    print("\nAdded/updated 'actual_team_choice' column to the CSV file (computed per session, exactly 3 players per team).")
+    print("Added/updated 'actual_team_choice' column to the CSV file (computed per session, exactly 3 players per team).")
 
     # --- Group-level accuracy ---
     print("\n--- Group-level accuracy ---")
@@ -66,14 +66,14 @@ def analyze_consolidated_results():
     if group_accs:
         avg_group_acc = sum(group_accs) / len(group_accs)
         std_group_acc = np.std(group_accs, ddof=1) if len(group_accs) > 1 else 0  # ADDED: std dev
-        print(f"\nAverage group-level accuracy across all runs: {avg_group_acc:.2f}%")
+        print(f"Average group-level accuracy across all runs: {avg_group_acc:.2f}%")
         print(f"Group-level accuracy standard deviation: {std_group_acc:.2f}%")  # ADDED
     else:
         print("\nNo valid group-level accuracy to compute average.")
 
     # Group outcome predictions
     group_df = df.drop_duplicates(subset=['run_number', 'session_id'])
-    print(f"\nGroup outcome predictions (by run):")
+    print(f"Group outcome predictions (by run):")
     print(group_df.groupby('run_number')['group_outcome_prediction'].value_counts().unstack(fill_value=0))
 
     # Print number of sessions per run
@@ -152,7 +152,7 @@ def analyze_consolidated_results():
             total += 1
         acc = (correct / total * 100) if total > 0 else 0
         group_accs_51_100.append(acc)
-    print('\nGROUP-LEVEL ACCURACY FOR RUNS 51-100:')
+    print('GROUP-LEVEL ACCURACY FOR RUNS 51-100:')
     if group_accs_51_100:
         avg_group_51_100 = np.mean(group_accs_51_100)
         std_group_51_100 = np.std(group_accs_51_100, ddof=1) if len(group_accs_51_100) > 1 else 0
@@ -179,7 +179,7 @@ def analyze_consolidated_results():
             total += 1
         acc = (correct / total * 100) if total > 0 else 0
         group_accs_101_onwards.append(acc)
-    print('\nGROUP-LEVEL ACCURACY FOR RUNS 101 ONWARDS:')
+    print('GROUP-LEVEL ACCURACY FOR RUNS 101 ONWARDS:')
     if group_accs_101_onwards:
         avg_group_101_onwards = np.mean(group_accs_101_onwards)
         std_group_101_onwards = np.std(group_accs_101_onwards, ddof=1) if len(group_accs_101_onwards) > 1 else 0
