@@ -54,7 +54,7 @@ def process_and_predict():
     # Loop through each unique game
     for name, group in grouped_games:
         session_id = str(name)
-        print(f"\n--- Processing Game: {session_id} ---")
+        print(f"--- Processing Game: {session_id} ---")
         group = group.sort_index()
 
         # Format Proposals and Chat Logs
