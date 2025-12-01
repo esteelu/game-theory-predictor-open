@@ -20,9 +20,7 @@ def get_structured_prediction_from_system_user_task1(system_message: str, user_m
             completion = client.chat.completions.create(
                 model=MODEL_NAME,
                 temperature=TEMPERATURE,
-                # --- Force the model to output valid JSON ---
                 response_format={"type": "json_object"},
-                # --- Timeout to prevent hangs ---
                 timeout=60.0,
                 messages=[
                     {"role": "system", "content": system_message},
