@@ -9,5 +9,5 @@ This directory houses the Python scripts that implement the actual prediction al
 ## Structure
 
 Add your prediction scripts here following the naming convention:
-- `task_*.py` - Individual task prediction scripts
-- `predict_*.py` - General prediction utilities
+- `structured_prompt_loader*.py` - Making API calls for different tasks
+- `predict_*.py` - Making predictions
