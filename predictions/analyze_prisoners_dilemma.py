@@ -18,7 +18,7 @@ def summarize_accuracy(report_file):
     correct_team_predictions = team_level_df['team_prediction_correct'].sum()
     team_accuracy_majority = (correct_team_predictions / total_team_predictions * 100) if total_team_predictions > 0 else 0
     
-    # Team-level accuracy (AI's own team prediction)
+    # Team-level accuracy
     correct_team_predictions_ai = (team_level_df['actual_team_outcome'] == team_level_df['predicted_team_outcome']).sum()
     team_accuracy_ai = (correct_team_predictions_ai / total_team_predictions * 100) if total_team_predictions > 0 else 0
     
