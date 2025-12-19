@@ -212,51 +212,6 @@ def run_analysis(run_number=None):
     final_df.to_csv(FINAL_ANALYTICAL_REPORT_FILE, index=False)
     print(f"Final analytical report saved to '{FINAL_ANALYTICAL_REPORT_FILE}'")
 
-    # 5. Calculate and Display Accuracy
-    print("--- 5. Final Accuracy Analysis ---")
-    total_individual_choices = len(final_df)
-    correct_individual_choices = final_df['individual_prediction_correct'].sum()
-    individual_accuracy = (correct_individual_choices / total_individual_choices * 100) if total_individual_choices > 0 else 0
-
-    team_level_df = final_df.drop_duplicates(subset=['session_id'])
-    total_team_predictions = len(team_level_df)
-    correct_team_predictions = team_level_df['team_prediction_correct'].sum()
-    team_accuracy = (correct_team_predictions / total_team_predictions * 100) if total_team_predictions > 0 else 0
-    
-    print("\n" + "="*40)
-    print("MINIMAL ACCURACY REPORT")
-    print("="*40)
-    print(f"Total Team-Level Predictions (Perspectives): {total_team_predictions}")
-    print(f"Correct Team-Level Predictions:              {correct_team_predictions}")
-    print(f"TEAM ACCURACY:                               {team_accuracy:.2f}%")
-    print("-"*40)
-    print(f"Total Individual Player Predictions:         {total_individual_choices}")
-    print(f"Correct Individual Player Predictions:       {correct_individual_choices}")
-    print(f"INDIVIDUAL VOTE ACCURACY:                    {individual_accuracy:.2f}%")
-    print("="*40)
-
-    # 6. DATA VALIDATION CHECK
-    print("--- 6. Data Validation: Checking for Missing Predictions ---")
-    
-    missing_individual_preds_df = final_df[final_df['predicted_individual_vote'] == 'N/A']
-    if not missing_individual_preds_df.empty:
-        print(f"WARNING: Found {len(missing_individual_preds_df)} missing individual player predictions.")
-        print("Sessions and players with missing predictions:")
-        print(missing_individual_preds_df[['session_id', 'opponent_player_id']].to_string(index=False))
-    else:
-        print("No missing individual player predictions found.")
-
-    missing_team_preds_df = team_level_df[team_level_df['predicted_team_outcome'] == 'N/A']
-    if not missing_team_preds_df.empty:
-        print(f"WARNING: Found {len(missing_team_preds_df)} missing overall team predictions.")
-        print("Sessions with missing team predictions:")
-        print(missing_team_preds_df[['session_id']].to_string(index=False))
-    else:
-        print("No missing overall team predictions found.")
-    
-    print("--- Overview Analysis Complete ---")
-
-
 if __name__ == "__main__":
     run_number = None
     if len(sys.argv) > 1:
