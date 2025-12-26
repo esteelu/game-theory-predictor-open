@@ -1,4 +1,4 @@
-# Analyze Trust Game
+# Overview of Trust Game
 
 import pandas as pd
 import numpy as np
