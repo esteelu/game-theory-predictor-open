@@ -1,4 +1,4 @@
-# Prediction of Prisoners' Dilemma Games
+# Prediction of Prisoner's Dilemma Games
 
 import pandas as pd
 import json
