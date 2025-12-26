@@ -3,7 +3,7 @@ Predicting minds
 
 ## General Pipeline
 
-![Component Image](Component_Image.png)
+![Flow](Flow.png)
 
 ## Project Structure
 
