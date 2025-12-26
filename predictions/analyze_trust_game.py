@@ -95,11 +95,6 @@ def analyze_consolidated_results():
         std_1_50 = np.std(run_accuracies_1_50)
         print(f"Mean accuracy: {mean_1_50:.2f}%")
         print(f"Standard deviation: {std_1_50:.2f}%")
-        if len(run_accuracies_1_50) >= 10:
-            q1 = np.percentile(run_accuracies_1_50, 25)
-            q2 = np.percentile(run_accuracies_1_50, 50)
-            q3 = np.percentile(run_accuracies_1_50, 75)
-            print(f"Q1: {q1:.2f}% | Median: {q2:.2f}% | Q3: {q3:.2f}% | IQR: {q3-q1:.2f}%")
 
     # --- SPLIT ANALYSIS: Runs 51-100 ---
     print("\n=== SPLIT ANALYSIS: RUNS 51-100 ===")
@@ -124,11 +119,6 @@ def analyze_consolidated_results():
         std_51_100 = np.std(run_accuracies_51_100)
         print(f"Mean accuracy: {mean_51_100:.2f}%")
         print(f"Standard deviation: {std_51_100:.2f}%")
-        if len(run_accuracies_51_100) >= 10:
-            q1 = np.percentile(run_accuracies_51_100, 25)
-            q2 = np.percentile(run_accuracies_51_100, 50)
-            q3 = np.percentile(run_accuracies_51_100, 75)
-            print(f"Q1: {q1:.2f}% | Median: {q2:.2f}% | Q3: {q3:.2f}% | IQR: {q3-q1:.2f}%")
 
     # --- SPLIT ANALYSIS: Runs 101 Onwards ---
     print("\n=== SPLIT ANALYSIS: RUNS 101 ONWARDS ===")
@@ -153,11 +143,6 @@ def analyze_consolidated_results():
         std_101_onwards = np.std(run_accuracies_101_onwards)
         print(f"Mean accuracy: {mean_101_onwards:.2f}%")
         print(f"Standard deviation: {std_101_onwards:.2f}%")
-        if len(run_accuracies_101_onwards) >= 10:
-            q1 = np.percentile(run_accuracies_101_onwards, 25)
-            q2 = np.percentile(run_accuracies_101_onwards, 50)
-            q3 = np.percentile(run_accuracies_101_onwards, 75)
-            print(f"Q1: {q1:.2f}% | Median: {q2:.2f}% | Q3: {q3:.2f}% | IQR: {q3-q1:.2f}%")
 
     print(f"\n✓ Analysis complete! Files saved:")
     print(f"  - {PER_RUN_ACCURACY_FILE}")
