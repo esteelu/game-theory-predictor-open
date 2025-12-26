@@ -1,4 +1,4 @@
-# Making API calls for the Minimum Effort Game (Task 1).
+# Making API calls for the Minimum Effort Game
 
 import time
 import json
@@ -11,12 +11,12 @@ def get_structured_prediction_from_system_user_task1(system_message: str, user_m
     max_retries = 3
     initial_wait_time = 2
 
-    print("      -> Calling AI model for Task 1 prediction...")
+    print("Calling AI model for MEG prediction...")
     client = get_agent_client()
 
     for attempt in range(max_retries):
         try:
-            # Create the API call with the system and user messages
+            # Create call with the system and user messages
             completion = client.chat.completions.create(
                 model=MODEL_NAME,
                 temperature=TEMPERATURE,
