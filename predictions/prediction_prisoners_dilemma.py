@@ -24,8 +24,6 @@ SENDER_COL = 'Sender'
 MESSAGE_COL = 'texttype'
 VOTE_COL = 'T3_Vote'
 
-# --- 2. Helper functions ---
-
 def intelligent_parse(raw_json_text):
     """Robustly finds and decodes a JSON object from the AI's raw output."""
     if not isinstance(raw_json_text, str):
@@ -51,11 +49,9 @@ def normalize_vote(vote):
         return 'Defect'
     return 'N/A'
 
-# --- 3. Main Analysis ---
-
 def run_analysis(run_number=None):
     """
-    Main pipeline to load data, run predictions, and generate the final report.
+    Load data, run predictions, and generate the final report.
     """
     global RAW_PREDICTIONS_FILE, FINAL_ANALYTICAL_REPORT_FILE
     if run_number is not None:
@@ -65,7 +61,6 @@ def run_analysis(run_number=None):
         RAW_PREDICTIONS_FILE = 'minimal_raw_ai_predictions.csv'
         FINAL_ANALYTICAL_REPORT_FILE = 'final_full_analytical_report_task2_minimal.csv'
     
-    # a. Load Data and Prompts
     print("--- 1. Loading data and prompt files ---")
     try:
         df = pd.read_excel(EXCEL_FILE)
@@ -78,7 +73,6 @@ def run_analysis(run_number=None):
         print(f"ERROR: Make sure '{e.filename}' exists. You must create the prompt files.")
         return
 
-    # b. Prepare and Filter Data
     print("--- 2. Preparing and filtering master data ---")
     relevant_df = df[df[TREATMENT_COL] == 2].copy()
     relevant_df['session'] = relevant_df['session'].astype(str)
@@ -87,7 +81,6 @@ def run_analysis(run_number=None):
     relevant_df[SUBGROUP_COL] = pd.to_numeric(relevant_df[SUBGROUP_COL], errors='coerce').astype('Int64')
     print(f"Data prepared. Found {relevant_df['game_id'].nunique()} unique games (sessions).")
 
-    # c. Process Each Game Symmetrically
     print("--- 3. Generating predictions for each game ---")
     all_results = []
     all_raw_predictions = []
@@ -107,7 +100,7 @@ def run_analysis(run_number=None):
             session_id = f"{game_id}_{focal_subgroup}"
             print(f"Processing Perspective: {session_id}")
 
-            # A. Format Inputs for the AI
+            # A. Format Inputs
             team1_players = sorted(game_data[game_data[SUBGROUP_COL] == focal_subgroup][SENDER_COL].unique())
             team2_players = sorted(game_data[game_data[SUBGROUP_COL] == opponent_subgroup][SENDER_COL].unique())
             focal_chat_data = game_data[(game_data[SUBGROUP_COL] == focal_subgroup) & (game_data[TASK_COL] == 3)]
@@ -123,7 +116,7 @@ def run_analysis(run_number=None):
                 INTERGROUP_CHAT_LOGS=intergroup_chat_logs
             )
             
-            # B. Get AI Prediction
+            # Get Prediction
             ai_response_text = get_structured_prediction_from_system_user(system_message, user_message)
 
             # Store the raw prediction before parsing
@@ -135,7 +128,7 @@ def run_analysis(run_number=None):
                 print(f"SKIPPING session {session_id} due to parsing failure.")
                 continue
             
-            # C. Get Ground Truth for the Opponent Team
+            # Get Ground Truth for the Opponent Team
             opponent_actual_votes = {}
             
             for p_id in team2_players:
@@ -149,13 +142,13 @@ def run_analysis(run_number=None):
                     print(f"WARNING: No vote found for player {p_id} in any task")
                     opponent_actual_votes[str(p_id)] = 'N/A'
 
-            # Calculate team outcome using RAW votes before normalization
+            # Calculate team outcome using raw votes
             raw_coop_votes = sum(1 for vote in opponent_actual_votes.values() 
                                if isinstance(vote, str) and vote.strip().lower() in ['m', 'cooperate', 'coop'])
             actual_team_outcome = 'Cooperate' if raw_coop_votes >= 2 else 'Defect'
             print(f"Debug: Raw votes for team outcome: {raw_coop_votes} cooperate votes -> {actual_team_outcome}")
 
-            # D. Parse AI Predictions and Match to Ground Truth
+            # Parse Predictions and Match to Ground Truth
             ai_preds = parsed_info.get('team2_player_predictions', [])
             ai_final_pred = parsed_info.get('team2_final_prediction', {})
 
@@ -177,7 +170,7 @@ def run_analysis(run_number=None):
                         reasoning = ai_p.get('prediction_reasoning', 'N/A')
                         break
 
-                # E. Store all data
+                # Store all data
                 result_row = {
                     'session_id': session_id,
                     'game_id': game_id,
@@ -194,16 +187,15 @@ def run_analysis(run_number=None):
                 }
                 all_results.append(result_row)
     
-    # 4. Create and Save ALL Report Files
-    print(f"--- 4. Creating and saving minimal report files ---")
+    print(f"--- 4. Creating and saving report files ---")
     
-    # 4a. Save the Raw Predictions File
+    # Save the Raw Predictions File
     if all_raw_predictions:
         raw_df = pd.DataFrame(all_raw_predictions)
         raw_df.to_csv(RAW_PREDICTIONS_FILE, index=False)
         print(f"Raw AI predictions saved to '{RAW_PREDICTIONS_FILE}'")
     
-    # 4b. Save the Final Analytical Report
+    # Save the Final Analytical Report
     if not all_results:
         print("No results were generated.")
         return
