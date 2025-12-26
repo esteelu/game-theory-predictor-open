@@ -1,4 +1,4 @@
-# Making API calls for the Prisoners' Dilemma (Task 2).
+# Making API calls for the Prisoner's Dilemma
 
 import time
 import json
@@ -11,12 +11,12 @@ def get_structured_prediction_from_system_user(system_message: str, user_message
     max_retries = 3
     initial_wait_time = 2
 
-    print("      -> Calling AI model for Task 2 prediction...")
+    print("Calling model for PD prediction...")
     client = get_agent_client()
 
     for attempt in range(max_retries):
         try:
-            # Create the API call with the system and user messages
+            # Create the call with the system and user messages
             completion = client.chat.completions.create(
                 model=MODEL_NAME,
                 temperature=TEMPERATURE,
