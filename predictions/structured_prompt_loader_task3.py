@@ -1,4 +1,4 @@
-# Making API calls for the Trust Game (Task 3).
+# Making API calls for the Trust Game
 import time
 import json
 
@@ -7,7 +7,7 @@ def get_structured_game_prediction_system_user(system_message: str, user_message
     from agent_pool import get_agent_client, MODEL_NAME, TEMPERATURE
     max_retries = 3
     initial_wait_time = 2
-    print("      -> Calling AI model for Trust Game prediction...")
+    print("Calling model for TG prediction...")
     client = get_gpt4mini_client()
     for attempt in range(max_retries):
         try:
