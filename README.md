@@ -1,5 +1,4 @@
 # game-theory-predictor-open
-Predicting minds
 
 ## General Pipeline
 
@@ -7,6 +6,10 @@ Predicting minds
 
 ## Project Structure
 
-- **instructions/** - System and user instructions for the game theory predictor
+- **instructions/** - System and user instructions
 - **agent_pool/** - Agent pool configuration
 - **predictions/** - Python scripts for task predictions
+
+## Example (MEG)
+- In prediction folder, execute prediction_minimum_effort.py, follow by analyze_minimum_effort.py
+- Analyze the CONSOLIDATED_OUTPUT_FILE, 'minimum_effort_consolidated.csv'
