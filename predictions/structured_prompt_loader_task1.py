@@ -5,7 +5,7 @@ import json
 
 def get_structured_prediction_from_system_user_task1(system_message: str, user_message: str):
     
-    from agent_pool import get_agent_client, MODEL_NAME, TEMPERATURE
+    from agent_pool.agent import get_agent_client, MODEL_NAME, TEMPERATURE
 
     # --- Configuration for retries ---
     max_retries = 3
