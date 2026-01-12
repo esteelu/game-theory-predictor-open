@@ -8,7 +8,7 @@ def get_structured_game_prediction_system_user(system_message: str, user_message
     max_retries = 3
     initial_wait_time = 2
     print("Calling model for TG prediction...")
-    client = get_gpt4mini_client()
+    client = get_agent_client()
     for attempt in range(max_retries):
         try:
             completion = client.chat.completions.create(
