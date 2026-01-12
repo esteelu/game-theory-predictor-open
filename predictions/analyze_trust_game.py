@@ -1,5 +1,3 @@
-# Overview of Trust Game
-
 import pandas as pd
 import numpy as np
 
@@ -21,7 +19,7 @@ def analyze_consolidated_results():
     correct_predictions = len(df[df['prediction_correctness'] == 'Correct'])
     overall_accuracy = (correct_predictions / total_predictions) * 100 if total_predictions > 0 else 0
     
-    # --- Accuracy by Run ---
+    # --- Accuracy by run ---
     run_accuracy = []
     for run_num in sorted(df['run_number'].unique()):
         run_data = df[df['run_number'] == run_num]
@@ -39,10 +37,10 @@ def analyze_consolidated_results():
     run_accuracy_df = pd.DataFrame(run_accuracy)
     run_accuracy_df.to_csv(PER_RUN_ACCURACY_FILE, index=False)
 
-    # --- Consistency Analysis ---
+    # --- Consistency ---
     run_accuracies = [stat['accuracy_percentage'] for stat in run_accuracy]
 
-    # --- Summary Statistics ---
+    # --- Summary statistics ---
     summary_stats = {
         'metric': [
             'total_runs',
@@ -72,7 +70,7 @@ def analyze_consolidated_results():
     summary_df = pd.DataFrame(summary_stats)
     summary_df.to_csv(SUMMARY_STATS_FILE, index=False)
 
-    # --- SPLIT ANALYSIS: Runs 1-50 ---
+    # --- Runs 1-50 ---
     print("=== SPLIT ANALYSIS: RUNS 1-50 ===")
     df_1_50 = df[(df['run_number'] >= 1) & (df['run_number'] <= 50)]
     total_1_50 = len(df_1_50)
@@ -96,7 +94,7 @@ def analyze_consolidated_results():
         print(f"Mean accuracy: {mean_1_50:.2f}%")
         print(f"Standard deviation: {std_1_50:.2f}%")
 
-    # --- SPLIT ANALYSIS: Runs 51-100 ---
+    # --- Runs 51-100 ---
     print("\n=== SPLIT ANALYSIS: RUNS 51-100 ===")
     df_51_100 = df[(df['run_number'] >= 51) & (df['run_number'] <= 100)]
     total_51_100 = len(df_51_100)
@@ -120,7 +118,7 @@ def analyze_consolidated_results():
         print(f"Mean accuracy: {mean_51_100:.2f}%")
         print(f"Standard deviation: {std_51_100:.2f}%")
 
-    # --- SPLIT ANALYSIS: Runs 101 Onwards ---
+    # --- Runs 101 Onwards ---
     print("\n=== SPLIT ANALYSIS: RUNS 101 ONWARDS ===")
     df_101_onwards = df[df['run_number'] >= 101]
     total_101_onwards = len(df_101_onwards)
