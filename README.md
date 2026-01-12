@@ -15,10 +15,7 @@
 
 ## Execution
 Execute `predict_*.py` and `analyze_*.py` for generating predictions and preliminary summary statistics.
-
-**Example (MEG)**: 
-- Execute prediction_minimum_effort.py, follow by analyze_minimum_effort.py
-- Analyze the CONSOLIDATED_OUTPUT_FILE, 'minimum_effort_consolidated.csv'
+**Example (MEG)**: Execute prediction_minimum_effort.py, follow by analyze_minimum_effort.py
 
 ## Outputs
 Note: The output filenames in this package have been standardized for ease of future use. These names may differ from those used during development, but the content/structure is unchanged.
