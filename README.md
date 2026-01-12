@@ -1,5 +1,3 @@
-# game-theory-predictor-open
-
 ## General Pipeline
 
 ![Flow](Flow.png)
