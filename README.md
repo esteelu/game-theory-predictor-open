@@ -18,5 +18,5 @@ Execute `predict_*.py` and `analyze_*.py` for generating predictions and prelimi
 **Example (MEG)**: Execute prediction_minimum_effort.py, follow by analyze_minimum_effort.py
 
 ## Outputs
-Note: The output filenames in this package have been standardized for ease of future use. These names may differ from those used during development, but the content/structure is unchanged.
+Note: The output filenames in this package have been standardized for ease of future use. These names may differ from those used during development, but the structure is unchanged.
 
