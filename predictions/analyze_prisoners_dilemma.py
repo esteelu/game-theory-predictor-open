@@ -12,17 +12,16 @@ def extract_run_number(filename):
 def summarize_accuracy(report_file):
     df = pd.read_csv(report_file)
     
-    # Team-level accuracy
+    # Team-level
     team_level_df = df.drop_duplicates(subset=['session_id'])
     total_team_predictions = len(team_level_df)
     correct_team_predictions = team_level_df['team_prediction_correct'].sum()
     team_accuracy_majority = (correct_team_predictions / total_team_predictions * 100) if total_team_predictions > 0 else 0
     
-    # Team-level accuracy
     correct_team_predictions_ai = (team_level_df['actual_team_outcome'] == team_level_df['predicted_team_outcome']).sum()
     team_accuracy_ai = (correct_team_predictions_ai / total_team_predictions * 100) if total_team_predictions > 0 else 0
     
-    # Individual-level accuracy
+    # Individual-level
     total_individual_choices = len(df)
     correct_individual_choices = df['individual_prediction_correct'].sum()
     individual_accuracy = (correct_individual_choices / total_individual_choices * 100) if total_individual_choices > 0 else 0
@@ -57,7 +56,7 @@ def main():
                       'correct_team_predictions_majority','correct_team_predictions_ai','total_team_predictions',
                       'correct_individual_choices','total_individual_choices']].to_string(index=False, float_format='%.2f'))
     
-    # Averages and standard deviations
+    # Averages and std dev
     avg_team_acc = summary_df['team_accuracy_majority'].mean()
     std_team_acc = summary_df['team_accuracy_majority'].std(ddof=1) if len(summary_df) > 1 else 0
     avg_team_acc_ai = summary_df['team_accuracy_ai'].mean()
@@ -73,7 +72,7 @@ def main():
     print(f"Average Individual Vote Accuracy:     {avg_indiv_acc:.2f}%")
     print(f"Standard Deviation (Individual):      {std_indiv_acc:.2f}%")
     
-    # Save to CSV
+    # Save
     summary_df.to_csv('aggregated_accuracy_summary_minimal.csv', index=False)
     print('\nSaved summary to aggregated_accuracy_summary_minimal.csv')
 
