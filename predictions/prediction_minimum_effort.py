@@ -1,3 +1,5 @@
+# Prediction of Minimum Effort Games
+
 import pandas as pd
 import os
 import sys
@@ -30,7 +32,6 @@ def process_and_predict():
     """
     Reads data, sends it to the API using separate system/user prompts, and saves the results.
     """
-    # --- Load the prompt files ---
     print("--- 1. Loading data and prompt files ---")
     try:
         with open(SYSTEM_PROMPT_FILE, 'r', encoding='utf-8') as f:
@@ -57,7 +58,7 @@ def process_and_predict():
         print(f"--- Processing Game: {session_id} ---")
         group = group.sort_index()
 
-        # Format Proposals and Chat Logs
+        # Format proposals and chat logs
         proposals_for_prompt = "Proposals:\n"
         for _, row in group[[SENDER_COL, PROPOSAL_COL]].drop_duplicates().iterrows():
             proposals_for_prompt += f"Player {row[SENDER_COL]} proposes: {row[PROPOSAL_COL]}\n"
@@ -67,13 +68,13 @@ def process_and_predict():
             chat_log_for_prompt += f"Player {row[SENDER_COL]}: {row[MESSAGE_COL]}\n"
         
         try:
-            # 1. Create the user message from the template
+            # Create user message from the template
             user_message = user_template.format(
                 PROPOSALS_DATA=proposals_for_prompt,
                 CHAT_LOGS=chat_log_for_prompt
             )
             
-            # 2. Call the API
+            # Call API
             ai_prediction = get_structured_prediction_from_system_user_task1(
                 system_message,
                 user_message
@@ -83,13 +84,13 @@ def process_and_predict():
             print(f"Error getting prediction for {session_id}: {e}")
             ai_prediction = f'{{"error": "API call failed: {e}"}}'
         
-        # Store the raw prediction text
+        # Store raw prediction text
         predictions_data.append({
             'session_id': session_id,
             'prediction_text': ai_prediction
         })
 
-        # Extract the true answers
+        # Extract truth
         for _, row in group[[SENDER_COL, ANSWER_COL]].drop_duplicates().iterrows():
             ground_truth_data.append({
                 'session_id': session_id,
