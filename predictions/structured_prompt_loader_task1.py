@@ -16,7 +16,6 @@ def get_structured_prediction_from_system_user_task1(system_message: str, user_m
 
     for attempt in range(max_retries):
         try:
-            # Create call with the system and user messages
             completion = client.chat.completions.create(
                 model=MODEL_NAME,
                 temperature=TEMPERATURE,
