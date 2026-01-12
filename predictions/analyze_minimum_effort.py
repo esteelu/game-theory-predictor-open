@@ -1,5 +1,3 @@
-# Overview of Minimum Effort Game
-
 import pandas as pd
 import os
 import numpy as np
