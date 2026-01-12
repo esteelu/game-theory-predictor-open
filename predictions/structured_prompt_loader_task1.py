@@ -1,4 +1,4 @@
-# Making API calls for the Minimum Effort Game
+# Making API calls for Minimum Effort Game
 
 import time
 import json
@@ -30,7 +30,7 @@ def get_structured_prediction_from_system_user_task1(system_message: str, user_m
             return completion.choices[0].message.content
         
         except Exception as e:
-            # If the API call fails, print the error and prepare to retry
+            # If the API call fails, print the error and retry
             print(f"API call failed on attempt {attempt + 1}/{max_retries}: {e}")
             
             if attempt == max_retries - 1:
