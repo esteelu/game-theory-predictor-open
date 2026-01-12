@@ -4,7 +4,9 @@
 
 ## Project Structure
 
-- **instructions/** - System and user instructions
+- **instructions/** - This folder contains system and user instructions for the LLM predictor.
+  System instructions: Configuration and setup instructions for the system
+  User instructions: Guidelines for users on what to do in each task
 - **agent_pool/** - Agent pool configuration
 - **predictions/** - Python scripts for task predictions
 
